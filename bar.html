@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bar Chart</title>
+    <script type="text/javascript" src="D3/d3.js"></script>
+    <script type="text/javascript" src="D3/d3.csv.js"></script>
+    <style type="text/css">
+
+body {
+  font: 10px sans-serif;
+}
+
+.bar rect {
+  fill: steelblue;
+}
+
+.bar text.value {
+  fill: white;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path {
+  fill: none;
+}
+
+.x.axis line {
+  stroke: #fff;
+  stroke-opacity: .8;
+}
+
+.y.axis path {
+  stroke: black;
+}
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+.chart rect {
+  stroke: white;
+  fill: steelblue;
+}
+
+.chart text.bar {
+  fill: white;
+}
+
+.chart text.rule {
+  fill: black;
+}
+
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+    var data = [4, 8 , 15, 16, 23, 42];
+   // var chart = d3.select("body").append("div").attr("class", "chart");
+    //var x = d3.scale.linear().domain([0, d3.max(data)]).range(["0px", chart.style("width")]);
+    //chart.selectAll("div").data(data).enter().append("div").style("width", x).text(String);
+    
+    var chart = d3.select("body")
+        .append("svg:svg")
+            .attr("class","chart")
+            .attr("width",440)
+            .attr("height",140)
+        .append("svg:g")
+            .attr("transform", "translate(10,15)");
+            
+    var x = d3.scale.linear()
+        .domain([0, d3.max(data)])
+        .range([0,420]);
+    var y = d3.scale.ordinal()
+        .domain(data)
+        .rangeBands([0, 120]);
+            
+    chart.selectAll("line")
+        .data(x.ticks(10)).enter().append("svg:line")
+            .attr("x1", x)
+            .attr("x2", x)
+            .attr("y1", 0)
+            .attr("y2", 120)
+            .attr("stroke", "#ccc");
+    chart.selectAll("text.rule")
+        .data(x.ticks(10)).enter().append("svg:text")
+            .attr("class", "rule")
+            .attr("x", x)
+            .attr("y", 0)
+            .attr("dy", -3)
+            .attr("text-anchor", "middle")
+            .text(String);
+    
+    chart.selectAll("rect").data(data).enter()
+        .append("svg:rect")
+            .attr("y", function(d,i) {return i*20;})
+            .attr("width",x)
+            .attr("height",y.rangeBand());
+            
+    chart.selectAll("text.bar").data(data).enter()
+        .append("svg:text")
+            .attr("class", "bar")
+            .attr("x", x)
+            .attr("y", function(d) {return y(d) + y.rangeBand() / 2; })
+            .attr("dx", -3)
+            .attr("dy", ".35em")
+            .attr("text-anchor", "end")
+            .text(String);
+
+    chart.append("svg:line")
+        .attr("y1", 0)
+        .attr("y2", 120)
+        .attr("stroke", "#000");
+    
+    </script>
+  </body>
+</html>
