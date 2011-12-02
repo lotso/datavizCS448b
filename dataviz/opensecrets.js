@@ -14,3 +14,68 @@ for(var i = 0; i < arrLength; i++) {
 	totals[i] = senMcconnell.records[i].totals;
 	organizations[i] = senMcconnell.records[i].organization;
 }
+
+
+function(data, labels)
+{
+    var chart = d3.select("body")
+        .append("svg:svg")
+            .attr("class","chart")
+            .attr("width",440)
+            .attr("height",140)
+        .append("svg:g")
+            .attr("transform", "translate(10,15)");
+            
+    var x = d3.scale.linear()
+        .domain([0, d3.max(data)])
+        .range([0,420]);
+    var y = d3.scale.ordinal()
+        .domain(data)
+        .rangeBands([0, 120]);
+            
+    chart.selectAll("line")
+        .data(x.ticks(10)).enter().append("svg:line")
+            .attr("x1", x)
+            .attr("x2", x)
+            .attr("y1", 0)
+            .attr("y2", 120)
+            .attr("stroke", "#ccc");
+    chart.selectAll("text.rule")
+        .data(x.ticks(10)).enter().append("svg:text")
+            .attr("class", "rule")
+            .attr("x", x)
+            .attr("y", 0)
+            .attr("dy", -3)
+            .attr("text-anchor", "middle")
+            .text(String);
+    
+    chart.selectAll("rect").data(data).enter()
+        .append("svg:rect")
+            .attr("y", function(d,i) {return i*20;})
+            .attr("width",x)
+            .attr("height",y.rangeBand());
+            
+    chart.selectAll("text.bar").data(data).enter()
+        .append("svg:text")
+            .attr("class", "bar")
+            .attr("x", x)
+            .attr("y", function(d) {return y(d) + y.rangeBand() / 2; })
+            .attr("dx", -3)
+            .attr("dy", ".35em")
+            .attr("text-anchor", "end")
+            .text(function(v)
+                    {
+                        var i = 0;
+                        for(i=0;i<data.length;i++)
+                        {
+                            if(v == data[i])
+                                return labels[i];
+                        }
+                        return "";
+                    });
+
+    chart.append("svg:line")
+        .attr("y1", 0)
+        .attr("y2", 120)
+        .attr("stroke", "#000");
+}
