@@ -4,10 +4,17 @@
     <title>Campaign Contributions</title>
     <script type="text/javascript" src="D3/d3.js"></script>
     <script type="text/javascript" src="D3/d3.csv.js"></script>
-    <script type="text/javascript" src="opensecrets.js"></script>
+    <script type="text/javascript" src="D3/lib/jquery/jquery.js"></script>
     <link type="text/css" rel="stylesheet" href="page.css"/>
   </head>
   <body>
-    <p> Hello World! </p>
+    <form>
+      <select onchange="updateGraph()" id="senators">
+          <option value="sen1">Sen1</option>
+          <option value="sen2">Sen2</option>
+          <option value="sen3">Sen3</option>
+      </select>
+    </form>
+    <script type="text/javascript" src="opensecrets.js"></script>
   </body>
 </html>
