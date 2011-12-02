@@ -8,9 +8,9 @@ if(arrLength > 20){
 }
 
 var totals = new Array(arrLength);
-var organizations = newArray(arrLength);
+var organizations = new Array(arrLength);
 
 for(var i = 0; i < arrLength; i++) {
 	totals[i] = senMcconnell.records[i].totals;
-	organizations[i] = senMcconnel.records[i].organization;
+	organizations[i] = senMcconnell.records[i].organization;
 }
