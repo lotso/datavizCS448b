@@ -203,7 +203,7 @@ function updateGraph(idName){
 			organizations[i] = senator.records[i].organization;
 		}
 		console.log("hello");
-		drawBarGraph("Sen " + count, idName, totals, organizations, 220, 200);
+		drawBarGraph("Sen " + count, idName, totals, organizations, 5, 220, 200);
 	//	updateData(totals, organizations);
 	//}
 }
