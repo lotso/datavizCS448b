@@ -207,7 +207,21 @@ function updateGraph(){
 }
 
 //updateGraph();
+$("#cardList").sortable();
+$("#cardList").disableSelection();
+
 
 function addSenator() {
-	$("#cardList").append($(document.createElement('li')));
+	createCard();
 }
+
+function remove(item) {
+   $("#sen" + $(item).attr("id")).remove();
+}
+var count = 0;
+
+function createCard(){
+	$("<li id=\"sen" + count + "\"><input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"remove\" id=\"" + count + "\"></li>").appendTo("#cardList");
+	count++;
+}
+
