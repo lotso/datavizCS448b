@@ -35,9 +35,6 @@ function drawBarGraph(subjectName, idName, data, labels, numItems, width, height
     x = d3.scale.linear()
         .domain([0, d3.max(data)])
         .range([0,chartWidth - 20]);
-    xHalf = d3.scale.linear()
-        .domain([0, d3.max(data)])
-        .range([0,(chartWidth-20)/2]);
     y = d3.scale.ordinal()
         .domain(data)
         .rangeBands([0, barWidth*data.length]);
@@ -67,9 +64,9 @@ function drawBarGraph(subjectName, idName, data, labels, numItems, width, height
             .attr("width",x)
             .attr("height",barWidth);
             
-    chart.selectAll("text.barName").data(data).enter()
+    chart.selectAll("text.nameLabels").data(data).enter()
         .append("svg:text")
-            .attr("class", "bar")
+            .attr("class", "nameLabels")
             .attr("x", 3)
             .attr("y", function(d, i) {return i*barWidth*1.2 + barWidth/2+padding/2; })
             .attr("dx", 0)
@@ -85,9 +82,9 @@ function drawBarGraph(subjectName, idName, data, labels, numItems, width, height
                 return "";
             });
             
-    chart.selectAll("text.barValue").data(data).enter()
+    chart.selectAll("text.valueLabels").data(data).enter()
         .append("svg:text")
-            .attr("class", "bar")
+            .attr("class", "valueLabels")
             .attr("x", x)
             .attr("y", function(d, i) {return i*barWidth*1.2 + barWidth/2+padding/2; })
             .attr("dx", -3)
@@ -105,4 +102,38 @@ function drawBarGraph(subjectName, idName, data, labels, numItems, width, height
         .attr("y2", lineHeight)
         .attr("stroke", "#000");
 }
-//drawBarGraph("Sen. Facer", 0, 0, 1000, 600);
+
+function redraw(data, labels)
+{
+    x = d3.scale.linear()
+        .domain([0, d3.max(data)])
+        .range([0,chartWidth - 20]);
+            
+    chart.selectAll("rect")
+        .data(data).transition()
+        .duration(1000)
+        .attr("width", x);
+    
+    chart.selectAll("text.nameLabels")
+        .data(data).transition()
+        .duration(1000)
+        .text(function(v)
+        {
+            var i = 0;
+                for(i=0;i<data.length;i++)
+                {
+                    if(v == data[i])
+                        return labels[i];
+                }
+                return "";
+        });
+        
+    chart.selectAll("text.valueLabels")
+        .data(data).transition()
+        .duration(1000)
+        .attr("x", x)
+        .text(function(v)
+        {
+            return "$" + Math.floor(v/100);
+        });
+}

@@ -6,7 +6,7 @@ body {
   fill: steelblue;
 }
 
-.bar text.value {
+text.labels, text.nameLabels, text.valueLabels {
   fill: white;
 }
 
