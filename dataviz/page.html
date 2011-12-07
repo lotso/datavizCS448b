@@ -8,13 +8,17 @@
     <link type="text/css" rel="stylesheet" href="page.css"/>
   </head>
   <body>
-    <form>
-      <select onchange="updateGraph()" id="senators">
+    <ul id="cardList">
+    </ul>
+    <form class="addCard">
+      <select id="senators">
           <option value="sen1">Sen1</option>
           <option value="sen2">Sen2</option>
           <option value="sen3">Sen3</option>
       </select>
+      <input type="button" value="Add senator" onclick="addSenator()"/>
     </form>
+ 
     <script type="text/javascript" src="opensecrets.js"></script>
   </body>
 </html>

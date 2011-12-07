@@ -7,8 +7,8 @@ var chartHeight = 600;
 var barWidth = 25;
 function drawBarGraph(data, labels)
 {
-//		data = [24, 13, 22, 10, 5];
-//		labels = ["Aasdf", "asB", "C", "D", "E"];
+		data = [24, 13, 22, 10, 5];
+		labels = ["Aasdf", "asB", "C", "D", "E"];
 
 		
     chart = d3.select("body")
@@ -66,7 +66,8 @@ function drawBarGraph(data, labels)
 						            }
 						            return "";
 						        });
-
+										 
+		
     chart.append("svg:line")
         .attr("y1", 0)
         .attr("y2", chartHeight)
@@ -78,25 +79,47 @@ function updateData(data, labels) {
 	x = d3.scale.linear()
       .domain([0, d3.max(data)])
       .range([0,chartWidth - 20]);
+
   y = d3.scale.ordinal()
       .domain(data)
       .rangeBands([0, barWidth*data.length]);
 
-  chart.selectAll("line")
-      .data(x.ticks(10)).enter().append("svg:line")
-          .attr("x1", x)
-          .attr("x2", x)
-          .attr("y1", 0)
-          .attr("y2", chartHeight)
-          .attr("stroke", "#ccc");
-  chart.selectAll("text.rule")
-      .data(x.ticks(10)).enter().append("svg:text")
-          .attr("class", "rule")
-          .attr("x", x)
-          .attr("y", 0)
-          .attr("dy", -3)
-          .attr("text-anchor", "middle")
-          .text(String);
+	/*
+	    chart.selectAll("line")
+	        .data(x.ticks(10)).enter().append("svg:line")
+	            .attr("x1", x)
+	            .attr("x2", x)
+	            .attr("y1", 0)
+	            .attr("y2", chartHeight)
+	            .attr("stroke", "#ccc");
+	    chart.selectAll("text.rule")
+
+	        .data(x.ticks(10)).enter().append("svg:text")
+	            .attr("class", "rule")
+	            .attr("x", x)
+	            .attr("y", 0)
+	            .attr("dy", -3)
+	            .attr("text-anchor", "middle")
+	            .text(String);
+	*/
+		chart.selectAll("line").remove();
+		chart.selectAll("text.rule").remove();
+	  chart.selectAll("line")
+	      .data(x.ticks(10)).enter().append("svg:line")
+	          .attr("x1", x)
+	          .attr("x2", x)
+	          .attr("y1", 0)
+	          .attr("y2", chartHeight)
+	          .attr("stroke", "#ccc");
+	
+   chart.selectAll("text.rule")
+       .data(x.ticks(10)).enter().append("svg:text")
+           .attr("class", "rule")
+           .attr("x", x)
+           .attr("y", 0)
+           .attr("dy", -3)
+           .attr("text-anchor", "middle")
+           .text(String);
 	
 	chart.selectAll("rect")
 					.data(data)
@@ -125,7 +148,6 @@ function updateData(data, labels) {
 				            }
 				            return "";
 				        });
-
 }
 
 function getArrayLength(senator) {
@@ -184,4 +206,8 @@ function updateGraph(){
 	}
 }
 
-updateGraph();
+//updateGraph();
+
+function addSenator() {
+	$("#cardList").append($(document.createElement('li')));
+}
