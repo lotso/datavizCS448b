@@ -4,9 +4,10 @@ var chartHeight = 600;
 var barWidth = 25;
 function drawBarGraph(subjectName, idName, data, labels, width, height)
 {
-    data = [24, 13, 22, 10, 5];
-    labels = ["Aasdf", "asB", "C", "D", "E"];
-    
+    // data = [24, 13, 22, 10, 5];
+    // labels = ["Aasdf", "asB", "C", "D", "E"];
+    console.log(width);
+		console.log(height);
     if(width) chartWidth = width;
     if(height) chartHeight = height;
     barWidth = chartHeight/(data.length*1.3);

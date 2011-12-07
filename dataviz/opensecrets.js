@@ -5,74 +5,74 @@ var chart, x, y;
 var chartWidth = 800;
 var chartHeight = 600;
 var barWidth = 25;
-function drawBarGraph(data, labels)
-{
-		data = [24, 13, 22, 10, 5];
-		labels = ["Aasdf", "asB", "C", "D", "E"];
-
-		
-    chart = d3.select("body")
-        .append("svg:svg")
-            .attr("class","chart")
-            .attr("width",chartWidth)
-            .attr("height",chartHeight)
-        .append("svg:g")
-            .attr("transform", "translate(10,15)");
-            
-    x = d3.scale.linear()
-        .domain([0, d3.max(data)])
-        .range([0,chartWidth - 20]);
-    y = d3.scale.ordinal()
-        .domain(data)
-        .rangeBands([0, barWidth*data.length]);
-            
-    chart.selectAll("line")
-        .data(x.ticks(10)).enter().append("svg:line")
-            .attr("x1", x)
-            .attr("x2", x)
-            .attr("y1", 0)
-            .attr("y2", chartHeight)
-            .attr("stroke", "#ccc");
-    chart.selectAll("text.rule")
-        .data(x.ticks(10)).enter().append("svg:text")
-            .attr("class", "rule")
-            .attr("x", x)
-            .attr("y", 0)
-            .attr("dy", -3)
-            .attr("text-anchor", "middle")
-            .text(String);
-    
-    chart.selectAll("rect").data(data).enter()
-        .append("svg:rect")
-            .attr("y", function(d,i) {return i*barWidth*1.3;})
-            .attr("width",x)
-            .attr("height",y.rangeBand());
-            
-    chart.selectAll("text.bar").data(data).enter()
-        .append("svg:text")
-            .attr("class", "bar")
-            .attr("x", x)
-            .attr("y", function(d, i) {return i*barWidth*1.3 + 12; })
-            .attr("dx", -3)
-            .attr("dy", ".35em")
-            .attr("text-anchor", "end")
-            .text(function(v)
-						        {
-						            var i = 0;
-						            for(i=0;i<data.length;i++)
-						            {
-						                if(v == data[i])
-						                    return labels[i];
-						            }
-						            return "";
-						        });
-										 
-		
-    chart.append("svg:line")
-        .attr("y1", 0)
-        .attr("y2", chartHeight)
-        .attr("stroke", "#000");
-}
+// function drawBarGraph(data, labels)
+// {
+// 		data = [24, 13, 22, 10, 5];
+// 		labels = ["Aasdf", "asB", "C", "D", "E"];
+// 
+// 		
+//     chart = d3.select("body")
+//         .append("svg:svg")
+//             .attr("class","chart")
+//             .attr("width",chartWidth)
+//             .attr("height",chartHeight)
+//         .append("svg:g")
+//             .attr("transform", "translate(10,15)");
+//             
+//     x = d3.scale.linear()
+//         .domain([0, d3.max(data)])
+//         .range([0,chartWidth - 20]);
+//     y = d3.scale.ordinal()
+//         .domain(data)
+//         .rangeBands([0, barWidth*data.length]);
+//             
+//     chart.selectAll("line")
+//         .data(x.ticks(10)).enter().append("svg:line")
+//             .attr("x1", x)
+//             .attr("x2", x)
+//             .attr("y1", 0)
+//             .attr("y2", chartHeight)
+//             .attr("stroke", "#ccc");
+//     chart.selectAll("text.rule")
+//         .data(x.ticks(10)).enter().append("svg:text")
+//             .attr("class", "rule")
+//             .attr("x", x)
+//             .attr("y", 0)
+//             .attr("dy", -3)
+//             .attr("text-anchor", "middle")
+//             .text(String);
+//     
+//     chart.selectAll("rect").data(data).enter()
+//         .append("svg:rect")
+//             .attr("y", function(d,i) {return i*barWidth*1.3;})
+//             .attr("width",x)
+//             .attr("height",y.rangeBand());
+//             
+//     chart.selectAll("text.bar").data(data).enter()
+//         .append("svg:text")
+//             .attr("class", "bar")
+//             .attr("x", x)
+//             .attr("y", function(d, i) {return i*barWidth*1.3 + 12; })
+//             .attr("dx", -3)
+//             .attr("dy", ".35em")
+//             .attr("text-anchor", "end")
+//             .text(function(v)
+// 						        {
+// 						            var i = 0;
+// 						            for(i=0;i<data.length;i++)
+// 						            {
+// 						                if(v == data[i])
+// 						                    return labels[i];
+// 						            }
+// 						            return "";
+// 						        });
+// 										 
+// 		
+//     chart.append("svg:line")
+//         .attr("y1", 0)
+//         .attr("y2", chartHeight)
+//         .attr("stroke", "#000");
+// }
 
 function updateData(data, labels) {
 	
@@ -160,27 +160,27 @@ function getArrayLength(senator) {
 	return arrLength;
 }
 var drawn = false;
-function updateGraph(){
+function updateGraph(idName){
 	//$(".chart").remove();
 	//console.log("sup");
 	var senatorName = $("#senators").val();
 	var senator;
-	if(!drawn){
-		senator = senMcconnell;
-
-		var arrLength = getArrayLength(senator);
-		console.log(arrLength);
-		var totals = new Array(arrLength);
-		var organizations = new Array(arrLength);
-
-		for(var i = 0; i < arrLength; i++) {
-			totals[i] = parseFloat(senator.records[i].totals);
-			organizations[i] = senator.records[i].organization;
-		}
-
-		drawBarGraph(totals, organizations);
-		drawn = true;
-	} else {	
+	// if(!drawn){
+	// 	senator = senMcconnell;
+	// 
+	// 	var arrLength = getArrayLength(senator);
+	// 	console.log(arrLength);
+	// 	var totals = new Array(arrLength);
+	// 	var organizations = new Array(arrLength);
+	// 
+	// 	for(var i = 0; i < arrLength; i++) {
+	// 		totals[i] = parseFloat(senator.records[i].totals);
+	// 		organizations[i] = senator.records[i].organization;
+	// 	}
+	// 
+	// 	drawBarGraph(totals, organizations);
+	// 	drawn = true;
+	// } else {	
 		
 		if(senatorName == "sen1") {
 			console.log("s1");
@@ -202,8 +202,10 @@ function updateGraph(){
 			totals[i] = parseFloat(senator.records[i].totals);
 			organizations[i] = senator.records[i].organization;
 		}
-		updateData(totals, organizations);
-	}
+		console.log("hello");
+		drawBarGraph("Sen " + count, idName, totals, organizations, 220, 200);
+	//	updateData(totals, organizations);
+	//}
 }
 
 //updateGraph();
@@ -211,7 +213,7 @@ $("#cardList").sortable();
 $("#cardList").disableSelection();
 
 
-function addSenator() {
+function addSenator(item) {
 	createCard();
 }
 
@@ -222,6 +224,8 @@ var count = 0;
 
 function createCard(){
 	$("<li id=\"sen" + count + "\"><input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"x\" id=\"" + count + "\"></li>").appendTo("#cardList");
+	updateGraph("sen"+count);
+	
 	count++;
 }
 
