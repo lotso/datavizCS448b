@@ -2,7 +2,7 @@ var chart, x, y;
 var chartWidth = 800;
 var chartHeight = 600;
 var barWidth = 25;
-function drawBarGraph(subjectName, data, labels, width, height)
+function drawBarGraph(subjectName, idName, data, labels, width, height)
 {
     data = [24, 13, 22, 10, 5];
     labels = ["Aasdf", "asB", "C", "D", "E"];
@@ -21,7 +21,7 @@ function drawBarGraph(subjectName, data, labels, width, height)
     }
 
 		
-    chart = d3.select("body")
+    chart = d3.select("#" + idName)
         .append("svg:svg")
             .attr("class","chart")
             .attr("width",chartWidth)
@@ -90,4 +90,4 @@ function drawBarGraph(subjectName, data, labels, width, height)
         .attr("y2", lineHeight)
         .attr("stroke", "#000");
 }
-drawBarGraph("Sen. Facer", 0, 0, 1000, 600);
+//drawBarGraph("Sen. Facer", 0, 0, 1000, 600);
