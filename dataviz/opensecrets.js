@@ -221,7 +221,7 @@ function remove(item) {
 var count = 0;
 
 function createCard(){
-	$("<li id=\"sen" + count + "\"><input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"remove\" id=\"" + count + "\"></li>").appendTo("#cardList");
+	$("<li id=\"sen" + count + "\"><input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"x\" id=\"" + count + "\"></li>").appendTo("#cardList");
 	count++;
 }
 

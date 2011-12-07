@@ -52,8 +52,22 @@ body {
 li, .addCard {
 	list-style: none;
 	border: 1px solid gray;
+	background-color: white;
 	height: 300px;
 	width: 240px;
 	margin: 5px;
 	float: left;
+}
+
+
+.remove {
+	float: right;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.remove:hover {
+	color: gray;
 }
