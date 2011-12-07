@@ -5,13 +5,14 @@ var barWidth = 25;
 function drawBarGraph(subjectName, idName, data, labels, numItems, width, height)
 {
     data = data.splice(0, numItems);
+    labels = labels.splice(0, numItems);
     // data = [24, 13, 22, 10, 5];
     // labels = ["Aasdf", "asB", "C", "D", "E"];
-    console.log(width);
-		console.log(height);
+
     if(width) chartWidth = width;
     if(height) chartHeight = height;
     barWidth = chartHeight/(data.length*1.3);
+    
     var padding = chartHeight - (barWidth * data.length);
     padding /= (data.length*2);
     
@@ -36,7 +37,7 @@ function drawBarGraph(subjectName, idName, data, labels, numItems, width, height
         .range([0,chartWidth - 20]);
     xHalf = d3.scale.linear()
         .domain([0, d3.max(data)])
-        .range([0,(chartWidth)/2]);
+        .range([0,(chartWidth-20)/2]);
     y = d3.scale.ordinal()
         .domain(data)
         .rangeBands([0, barWidth*data.length]);
@@ -64,7 +65,7 @@ function drawBarGraph(subjectName, idName, data, labels, numItems, width, height
         .append("svg:rect")
             .attr("y", function(d,i) {return i*barWidth*1.2 + padding;})
             .attr("width",x)
-            .attr("height",y.rangeBand());
+            .attr("height",barWidth);
             
     chart.selectAll("text.bar").data(data).enter()
         .append("svg:text")
