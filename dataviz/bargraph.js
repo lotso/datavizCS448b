@@ -2,8 +2,9 @@ var chart, x, y;
 var chartWidth = 800;
 var chartHeight = 600;
 var barWidth = 25;
-function drawBarGraph(subjectName, idName, data, labels, width, height)
+function drawBarGraph(subjectName, idName, data, labels, numItems, width, height)
 {
+    data = data.splice(0, numItems);
     // data = [24, 13, 22, 10, 5];
     // labels = ["Aasdf", "asB", "C", "D", "E"];
     console.log(width);
