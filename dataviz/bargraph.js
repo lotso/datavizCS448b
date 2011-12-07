@@ -67,24 +67,36 @@ function drawBarGraph(subjectName, idName, data, labels, numItems, width, height
             .attr("width",x)
             .attr("height",barWidth);
             
-    chart.selectAll("text.bar").data(data).enter()
+    chart.selectAll("text.barName").data(data).enter()
         .append("svg:text")
             .attr("class", "bar")
-            .attr("x", xHalf)
+            .attr("x", 3)
+            .attr("y", function(d, i) {return i*barWidth*1.2 + barWidth/2+padding/2; })
+            .attr("dx", 0)
+            .attr("dy", ".5em")
+            .text(function(v)
+            {
+                var i = 0;
+                for(i=0;i<data.length;i++)
+                {
+                    if(v == data[i])
+                        return labels[i];
+                }
+                return "";
+            });
+            
+    chart.selectAll("text.barValue").data(data).enter()
+        .append("svg:text")
+            .attr("class", "bar")
+            .attr("x", x)
             .attr("y", function(d, i) {return i*barWidth*1.2 + barWidth/2+padding/2; })
             .attr("dx", -3)
             .attr("dy", ".5em")
-            .attr("text-anchor", "middle")
+            .attr("text-anchor", "end")
             .text(function(v)
-						        {
-						            var i = 0;
-						            for(i=0;i<data.length;i++)
-						            {
-						                if(v == data[i])
-						                    return labels[i];
-						            }
-						            return "";
-						        });
+            {
+                return "$" + Math.floor(v/100);
+            });
 
     var lineHeight = chartHeight;
     if(bigView) lineHeight -= 38;
